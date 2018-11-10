@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Time Calculator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+</head>
+<body>
+    <p id="sec" style="display:none;">0</p>
+    <div class="section" style="height:30vh;">
+        <p id="disp" class="title has-text-centered is-1">0:00:00</p>
+    </div>
+    <div id="content" class="section" style="height:50vh;">
+        <div class="field">
+            <div class="control">
+                <input id="time" class="input" type="text" name="time" placeholder="Enter amount to add/remove...">
+            </div>
+        </div>
+        <p class="buttons has-addons is-centered">
+            <a class="button" onclick="addHour()">
+                <span class="icon is-small">
+                    <i class="fas fa-plus-square"></i>
+                </span>
+                <span>Hours</span>
+            </a>
+            <a class="button" onclick="addMinute()">
+                <span class="icon is-small">
+                    <i class="fas fa-plus-square"></i>
+                </span>
+                <span>Minutes</span>
+            </a>
+            <a class="button" onclick="addSecond()">
+                <span class="icon is-small">
+                    <i class="fas fa-plus-square"></i>
+                </span>
+                <span>Seconds</span>
+            </a>
+            <a class="button" onclick="subHour()">
+                <span class="icon is-small">
+                    <i class="fas fa-minus-square"></i>
+                </span>
+                <span>Hours</span>
+            </a>
+            <a class="button" onclick="subMinute()">
+                <span class="icon is-small">
+                    <i class="fas fa-minus-square"></i>
+                </span>
+                <span>Minutes</span>
+            </a>
+            <a class="button" onclick="subSecond()">
+                <span class="icon is-small">
+                    <i class="fas fa-minus-square"></i>
+                </span>
+                <span>Seconds</span>
+            </a>
+        </p>
+    </div>
+    <footer class="footer" style="height:10vh;">
+        <div class="content has-text-centered">
+            <p>A simple time calculator by Isaiah Fuller. Source code available on <a href="https://github.com/fullerspectrum">GitHub</a>.</p>
+            <a href="http://youtube.com/fullerxspectrum" target="_blank"><span class="icon is-medium"><i class="fab fa-youtube"></i></span></a>
+            <a href="http://twitch.tv/fullerspectrum" target="_blank"><span class="icon is-medium"><i class="fab fa-twitch"></i></span></a>
+            <a href="http://discord.io/fullerspectrum" target="_blank"><span class="icon is-medium"><i class="fab fa-discord"></i></span></a>
+            <a href="http://twitter.com/fullerspectrum" target="_blank"><span class="icon is-medium"><i class="fab fa-twitter"></i></span></a>
+        </div>
+    </footer>
+</body>
+<script>
+    function addHour(){
+        var x1 = parseInt(document.getElementById("sec").innerHTML) + (parseInt(document.getElementById("time").value) * 3600);
+        if(!isNaN(x1)){
+            document.getElementById("sec").innerHTML = x1;
+            updateDisp();
+        }
+    }
+    function addMinute(){
+        var x1 = parseInt(document.getElementById("sec").innerHTML) + (parseInt(document.getElementById("time").value) * 60);
+        if(!isNaN(x1)){
+            document.getElementById("sec").innerHTML = x1;
+            updateDisp();
+        }
+    }
+    function addSecond(){
+        var x1 = parseInt(document.getElementById("sec").innerHTML) + (parseInt(document.getElementById("time").value));
+        if(!isNaN(x1)){
+            document.getElementById("sec").innerHTML = x1;
+            updateDisp();
+        }
+    }
+    function subHour(){
+        var x1 = parseInt(document.getElementById("sec").innerHTML) - (parseInt(document.getElementById("time").value) * 3600);
+        if(x1 < 0)
+            x1 = 0;
+        if(!isNaN(x1)){
+            document.getElementById("sec").innerHTML = x1;
+            updateDisp();
+        }
+    }
+    function subMinute(){
+        var x1 = parseInt(document.getElementById("sec").innerHTML) - (parseInt(document.getElementById("time").value) * 60);
+        if(x1 < 0)
+            x1 = 0;
+        if(!isNaN(x1)){
+            document.getElementById("sec").innerHTML = x1;
+            updateDisp();
+        }
+    }
+    function subSecond(){
+        var x1 = parseInt(document.getElementById("sec").innerHTML) - (parseInt(document.getElementById("time").value));
+        if(x1 < 0)
+            x1 = 0;
+        if(!isNaN(x1)){
+            document.getElementById("sec").innerHTML = x1;
+            updateDisp();
+        }
+    }
+    function updateDisp(){
+        var seconds = parseInt(document.getElementById("sec").innerHTML);
+        var minutes = Math.floor(seconds / 60);
+        var hours = Math.floor(minutes / 60);
+
+        seconds -= minutes * 60;
+        minutes -= hours * 60;
+        if(minutes < 10) minutes = "0" + minutes;
+        if(seconds < 10) seconds = "0" + seconds;
+
+        document.getElementById("disp").innerHTML = hours + ":" + minutes + ":" + seconds;
+    }
+</script>
+</html>
